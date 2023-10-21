@@ -1,0 +1,10 @@
+{
+  "name": "Cilium",
+  "image": "quay.io/cilium/cilium-builder:ab25450a1c11d8546352fd5a392b7256aaece69b@sha256:a0e635299e0aa9e3114ee45999100fcdcd4b37fb23d950e4ede4189e910016af",
+  "workspaceFolder": "/go/src/github.com/khulnasoft/shipyard",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/khulnasoft/shipyard,type=bind",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker": {}
+  },
+  "postCreateCommand": "git config --global --add safe.directory /go/src/github.com/khulnasoft/shipyard"
+}

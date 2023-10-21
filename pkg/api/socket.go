@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright Authors of Cilium
+
 package api
 
 import (
@@ -23,19 +26,19 @@ func getGroupIDByName(grpName string) (int, error) {
 	return strconv.Atoi(group.Gid)
 }
 
-// SetDefaultPermissions sets the given socket's group to `ShipyardGroupName` and
+// SetDefaultPermissions sets the given socket's group to `CiliumGroupName` and
 // mode to `SocketFileMode`.
 func SetDefaultPermissions(socketPath string) error {
-	gid, err := getGroupIDByName(ShipyardGroupName)
+	gid, err := getGroupIDByName(CiliumGroupName)
 	if err != nil {
 		log.WithError(err).WithFields(logrus.Fields{
 			logfields.Path: socketPath,
-			"group":        ShipyardGroupName,
+			"group":        CiliumGroupName,
 		}).Debug("Group not found")
 	} else {
 		if err := os.Chown(socketPath, 0, gid); err != nil {
 			return fmt.Errorf("failed while setting up %s's group ID"+
-				" in %q: %s", ShipyardGroupName, socketPath, err)
+				" in %q: %s", CiliumGroupName, socketPath, err)
 		}
 	}
 	if err := os.Chmod(socketPath, SocketFileMode); err != nil {
